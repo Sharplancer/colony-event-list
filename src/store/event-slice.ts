@@ -52,8 +52,6 @@ export const getEvents = (
       const result = await getData(
           pageIndex, itemCount
       );
-
-      const { events, count } = result;
       dispatch(eventsActions.eventsRequestSuccess(result));
     } catch (error) {
       dispatch(eventsActions.eventsRequestFail('error'));

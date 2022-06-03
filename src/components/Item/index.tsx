@@ -31,7 +31,7 @@ const ItemComponent: React.FC<Props> = ({ eventType, time, values, ...props }) =
   }, [values])
 
   return (
-    <li className={styles.item}>
+    <div className={styles.item}>
       <div className={styles.content}>
         <div className={styles.avatar}>
           <canvas ref={canvasRef} {...props}/>
@@ -44,7 +44,7 @@ const ItemComponent: React.FC<Props> = ({ eventType, time, values, ...props }) =
           <span>{timeStamp2Date(time)}</span>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
 

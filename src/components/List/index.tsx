@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import LoadingSpin from "react-loading-spin";
+
 import { AppDispatch, RootState } from "../../store";
 import { getEvents } from "../../store/event-slice";
-import InfiniteScroll from "react-infinite-scroll-component";
-//import { Hearts } from "react-loader-spinner"
 import styles from './styles.module.css';
 import ItemComponent from "../Item";
 
@@ -32,16 +33,14 @@ const ListComponent = () => {
       dataLength={events.length}
       next={handleInfiniteScroll}
       hasMore={true}
-      loader={"isLoading"}
+      loader={<LoadingSpin size={"32px"}/>}
       height={window.innerHeight - 100}
     >
-      {/* <ul className={styles.list}> */}
-        {
-          events?.map((data, index) => {
-            return <ItemComponent key={index} eventType={data.eventType} time={data.logTime} values={data.values}/>
-          })
-        }
-      {/* </ul> */}
+      {
+        events?.map((data, index) => {
+          return <ItemComponent key={index} eventType={data.eventType} time={data.logTime} values={data.values}/>
+        })
+      }
     </InfiniteScroll>
   );
 }

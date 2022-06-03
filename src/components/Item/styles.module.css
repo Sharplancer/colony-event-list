@@ -6,7 +6,7 @@
   padding-right: 20px;
   background: white;
   margin-top: 1px;
-
+  transition: 500ms ease-in-out;
   font-family: "Muli" "Mulish";
 }
 
@@ -22,17 +22,20 @@
 
 .item:hover {
   background: #eaf3f7;
+  transition: 500ms ease-in-out;
 }
 
 .item:hover p {
   overflow: visible;
   white-space: normal;
   height:auto;
+  transition: 500ms ease-in-out;
 }
 
 .content {
   display: flex;
   align-items: flex-start;
+  transition: 500ms ease-in-out;
 }
 
 .avatar {
@@ -57,6 +60,7 @@ p {
   word-break: break-all;
   overflow:hidden;
   white-space: nowrap;
+  transition: 500ms ease-in-out;
 }
 
 span {

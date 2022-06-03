@@ -12,28 +12,29 @@ import ItemComponent from "../Item";
 const ListComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
   const count = useSelector((state: RootState) => state.events.count);
-  console.log(count);
   const events = useSelector((state: RootState) => state.events.events);
   const [pageIndex, setPageIndex] = useState<number>(0);
-  const [itemCount, setItemCount] = useState<number>(Math.floor((window.innerHeight - 100) / 90 + 2));
-
+  const [itemCount, setItemCount] = useState<number>(Math.floor((window.innerHeight - 100) / 30 + 2));
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(getEvents(pageIndex, itemCount));
+    if (count !== 0 && pageIndex * itemCount >= count)
+      setHasMore(false);
   }, [dispatch, pageIndex]);
 
   const handleInfiniteScroll = () => {
     setPageIndex(pageIndex + 1);
-    console.log("pageIndex", pageIndex);
-    }
+    console.log(pageIndex, itemCount);
+  }
 
   return (
     <InfiniteScroll
       className={styles.list}
       dataLength={events.length}
       next={handleInfiniteScroll}
-      hasMore={true}
-      loader={<LoadingSpin size={"32px"}/>}
+      hasMore={hasMore}
+      loader={<div className={styles.loader}><LoadingSpin size={"32px"}/></div>}
       height={window.innerHeight - 100}
     >
       {

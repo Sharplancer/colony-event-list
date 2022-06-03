@@ -37,17 +37,12 @@ const initData = async () => {
 
 
 //  This object includes a mapping of role ids to names
-//  console.log(ColonyRole, eventLogs.length);
-
   count = eventLogs.length;
   eventLogs.sort((a, b) => { return b.blockNumber - a.blockNumber} );
 
-  console.log("count", count, eventLogs);
 }
 
 export const getData = async (pageIndex: number, itemCount: number) => {
-
-  console.log("pageIndex, itemCount", pageIndex, itemCount);
 
   await initData();
 
@@ -60,7 +55,6 @@ export const getData = async (pageIndex: number, itemCount: number) => {
     const logTime = await getBlockTime(provider, <string>eventLog.blockHash);
 
     let singleData: Event = { eventType: singleLog.name, logTime, values: {} };
-    console.log(singleLog);
     if (singleLog.name === EVENT_TYPE.COLONY_ROLE_SET || singleLog.name === EVENT_TYPE.DOMAIN_ADDED) {
       const humanReadableDomainId = new utils.BigNumber(
         singleLog.values.domainId
@@ -97,7 +91,6 @@ export const getData = async (pageIndex: number, itemCount: number) => {
       // If you are confident that it's a low enough value, you can display it as an integer -- .toNumber()
       // But to be on the safe side, you can also use it as a string
       singleData.values.amount = convertedAmount.toString();
-      // console.log(singleData);
     }
     events.push(singleData);
   }

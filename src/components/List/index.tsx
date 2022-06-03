@@ -13,8 +13,8 @@ const ListComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
   const count = useSelector((state: RootState) => state.events.count);
   const events = useSelector((state: RootState) => state.events.events);
+  const itemCount = Math.floor((window.innerHeight - 100) / 30 + 2);
   const [pageIndex, setPageIndex] = useState<number>(0);
-  const [itemCount, setItemCount] = useState<number>(Math.floor((window.innerHeight - 100) / 30 + 2));
   const [hasMore, setHasMore] = useState<boolean>(true);
 
   useEffect(() => {

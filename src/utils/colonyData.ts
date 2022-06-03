@@ -55,7 +55,9 @@ export const getData = async (pageIndex: number, itemCount: number) => {
     const logTime = await getBlockTime(provider, eventLog.blockHash as string);
 
     let singleData: Event = { eventType: singleLog.name, logTime, values: {} };
-    if (singleLog.name === EVENT_TYPE.COLONY_ROLE_SET || singleLog.name === EVENT_TYPE.DOMAIN_ADDED) {
+    if (singleLog.name === EVENT_TYPE.COLONY_INITIALIZED)
+      singleData.values.userAddress = singleLog.values.colonyNetwork;
+    else if (singleLog.name === EVENT_TYPE.COLONY_ROLE_SET || singleLog.name === EVENT_TYPE.DOMAIN_ADDED) {
       const humanReadableDomainId = new utils.BigNumber(
         singleLog.values.domainId
       ).toString();

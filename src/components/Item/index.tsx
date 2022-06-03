@@ -4,7 +4,7 @@ import { EVENT_TYPE } from '../../utils/contants';
 import blockies from '../../utils/blockies';
 
 const timeStamp2Date = (timeStamp: number) => {
-  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jub",
+  var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let date = new Date(timeStamp);
   return `${date.getDate()} ${monthNames[date.getMonth()]}`
@@ -34,13 +34,12 @@ const ItemComponent: React.FC<Props> = ({ eventType, time, values, ...props }) =
     <li className={styles.item}>
       <div className={styles.content}>
         <div className={styles.avatar}>
-          {/* <img className={styles.avatar} src={icon}/> */}
           <canvas ref={canvasRef} {...props}/>
         </div>
         <div className={styles.text}>
           {eventType === EVENT_TYPE.COLONY_INITIALIZED && <p>Congratulations! It's a beautiful baby colony!</p>}
           {eventType === EVENT_TYPE.COLONY_ROLE_SET && <p><strong>{values.role}</strong> role assigned to user <strong>{values.userAddress}</strong> in domain <strong>{values.domainId}</strong>.</p>}
-          {eventType === EVENT_TYPE.PAYOUT_CLAIMED && <p>User <strong>{values.userAddress}</strong> claimed <strong>{values.amount}</strong> payout from pot <strong>{values.fundingPotId}</strong>.</p>}
+          {eventType === EVENT_TYPE.PAYOUT_CLAIMED && <p>User <strong>{values.userAddress}</strong> claimed <strong>{values.amount}DAI</strong> payout from pot <strong>{values.fundingPotId}</strong>.</p>}
           {eventType === EVENT_TYPE.DOMAIN_ADDED && <p>Domain <strong>{values.domainId}</strong> added.</p>}
           <span>{timeStamp2Date(time)}</span>
         </div>

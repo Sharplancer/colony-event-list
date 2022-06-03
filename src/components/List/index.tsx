@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { getEvents } from "../../store/event-slice";
 import InfiniteScroll from "react-infinite-scroll-component";
+//import { Hearts } from "react-loader-spinner"
 import styles from './styles.module.css';
 import ItemComponent from "../Item";
 
@@ -26,7 +27,14 @@ const ListComponent = () => {
     }
 
   return (
-    <InfiniteScroll className={styles.list} dataLength={events.length} next={handleInfiniteScroll} hasMore={true} loader={"isLoading..."} height={window.innerHeight - 100}>
+    <InfiniteScroll
+      className={styles.list}
+      dataLength={events.length}
+      next={handleInfiniteScroll}
+      hasMore={true}
+      loader={"isLoading"}
+      height={window.innerHeight - 100}
+    >
       {/* <ul className={styles.list}> */}
         {
           events?.map((data, index) => {

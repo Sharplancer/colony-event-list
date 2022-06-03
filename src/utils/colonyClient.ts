@@ -1,6 +1,7 @@
 import { getColonyNetworkClient, Network, ColonyClient, ColonyRole } from '@colony/colony-js';
 import { Wallet } from 'ethers';
 import { InfuraProvider } from 'ethers/providers';
+import { ColonyClientV4 } from '@colony/colony-js'
 
 // Don't worry too much about them, just use them as-is
 const MAINNET_NETWORK_ADDRESS = `0x5346D0f80e2816FaD329F2c140c870ffc3c3E2Ef`;
@@ -24,7 +25,7 @@ const getColonyClient = async () => {
   );
 
   // Get the colony client instance for the betacolony
-  const colonyClient = await networkClient.getColonyClient(MAINNET_BETACOLONY_ADDRESS);
+  const colonyClient = await networkClient.getColonyClient(MAINNET_BETACOLONY_ADDRESS) as ColonyClientV4;
   return colonyClient;
 }
 

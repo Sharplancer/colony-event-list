@@ -1,4 +1,4 @@
-import { ColonyRole, ColonyClient } from '@colony/colony-js';
+import { ColonyRole, ColonyClientV4 } from '@colony/colony-js';
 import { getLogs } from '@colony/colony-js'
 import { utils } from 'ethers';
 import { getBlockTime } from '@colony/colony-js';
@@ -8,7 +8,7 @@ import Event from '../types/Event'
 
 let inited: boolean = false;
 let count: number = 0;
-let colonyClient: ColonyClient;
+let colonyClient: ColonyClientV4;
 let events: Event[] = [];
 let eventLogs: any[] = [];
 
@@ -23,8 +23,12 @@ const initData = async () => {
   // Get the raw logs array
   eventLogs = await getLogs(colonyClient, eventFilter);
 
-  eventFilter = colonyClient.filters.PayoutClaimed(null, null, null);  
+  eventFilter = colonyClient.filters.ColonyRoleSet(null, null, null, null);  
   let newLogs = await getLogs(colonyClient, eventFilter);
+  eventLogs = eventLogs.concat(newLogs);
+
+  eventFilter = colonyClient.filters.PayoutClaimed(null, null, null);  
+  newLogs = await getLogs(colonyClient, eventFilter);
   eventLogs = eventLogs.concat(newLogs);
   
   eventFilter = colonyClient.filters.DomainAdded(null);  
@@ -55,14 +59,17 @@ export const getData = async (pageIndex: number, itemCount: number) => {
     // Use the blockHash to look up the actual time of the block that mined the transactions of the current event
     const logTime = await getBlockTime(provider, <string>eventLog.blockHash);
 
-    let singleData: Event = { eventType: singleLog.name, logTime, values: {} };    
-
-    if (singleLog.name === EVENT_TYPE.DOMAIN_ADDED) {
+    let singleData: Event = { eventType: singleLog.name, logTime, values: {} };
+    console.log(singleLog);
+    if (singleLog.name === EVENT_TYPE.COLONY_ROLE_SET || singleLog.name === EVENT_TYPE.DOMAIN_ADDED) {
       const humanReadableDomainId = new utils.BigNumber(
         singleLog.values.domainId
       ).toString();
-
       singleData.values.domainId = humanReadableDomainId;
+      singleData.values.userAddress = singleLog.values.user;
+      if (singleLog.name === EVENT_TYPE.COLONY_ROLE_SET) {
+        singleData.values.role = ColonyRole[singleLog.values.role];
+      }
     } else if (singleLog.name === EVENT_TYPE.PAYOUT_CLAIMED) {
       const humanReadableFundingPotId = new utils.BigNumber(
         singleLog.values.fundingPotId

@@ -1,0 +1,64 @@
+.item {
+  max-height: 90px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: white;
+  margin-top: 1px;
+
+  font-family: "Muli" "Mulish";
+}
+
+.item:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+  
+.item:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.item:hover {
+  background: #eaf3f7;
+}
+
+.item:hover p {
+  overflow: visible;
+  white-space: normal;
+  height:auto;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 37px;
+  height: 37px;
+}
+
+canvas {
+  border-radius: 18px;
+}
+
+.text {
+  margin-left: 15px;
+}
+
+p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+  width: 600px;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  overflow:hidden;
+  white-space: nowrap;
+}
+
+span {
+  font-size: 12px;
+}

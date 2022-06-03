@@ -1,0 +1,7 @@
+.homePage {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#f4f0f3, #eaf3f7);
+}

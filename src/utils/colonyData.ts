@@ -52,7 +52,7 @@ export const getData = async (pageIndex: number, itemCount: number) => {
     const singleLog = colonyClient.interface.parseLog(eventLog);
 
     // Use the blockHash to look up the actual time of the block that mined the transactions of the current event
-    const logTime = await getBlockTime(provider, <string>eventLog.blockHash);
+    const logTime = await getBlockTime(provider, eventLog.blockHash as string);
 
     let singleData: Event = { eventType: singleLog.name, logTime, values: {} };
     if (singleLog.name === EVENT_TYPE.COLONY_ROLE_SET || singleLog.name === EVENT_TYPE.DOMAIN_ADDED) {

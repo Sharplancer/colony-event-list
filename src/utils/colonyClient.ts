@@ -1,4 +1,4 @@
-import { getColonyNetworkClient, Network, ColonyClient, ColonyRole } from '@colony/colony-js';
+import { getColonyNetworkClient, Network } from '@colony/colony-js';
 import { Wallet } from 'ethers';
 import { InfuraProvider } from 'ethers/providers';
 import { ColonyClientV4 } from '@colony/colony-js'

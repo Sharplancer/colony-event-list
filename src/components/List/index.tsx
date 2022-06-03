@@ -21,11 +21,10 @@ const ListComponent = () => {
     dispatch(getEvents(pageIndex, itemCount));
     if (count !== 0 && pageIndex * itemCount >= count)
       setHasMore(false);
-  }, [dispatch, pageIndex]);
+  }, [dispatch, pageIndex, count, itemCount]);
 
   const handleInfiniteScroll = () => {
     setPageIndex(pageIndex + 1);
-    console.log(pageIndex, itemCount);
   }
 
   return (
@@ -34,8 +33,8 @@ const ListComponent = () => {
       dataLength={events.length}
       next={handleInfiniteScroll}
       hasMore={hasMore}
-      loader={<div className={styles.loader}><LoadingSpin size={"32px"}/></div>}
       height={window.innerHeight - 100}
+      loader={<div className={styles.loader}><LoadingSpin size={"32px"}/></div>}
     >
       {
         events?.map((data, index) => {

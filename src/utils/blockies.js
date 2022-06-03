@@ -3,10 +3,11 @@
 	var randseed = new Array(4); // Xorshift: [x, y, z, w] 32 bit values
 
 	function seedrand(seed) {
-		for (var i = 0; i < randseed.length; i++) {
+		var i;
+		for (i = 0; i < randseed.length; i++) {
 			randseed[i] = 0;
 		}
-		for (var i = 0; i < seed.length; i++) {
+		for (i = 0; i < seed.length; i++) {
 			randseed[i%4] = ((randseed[i%4] << 5) - randseed[i%4]) + seed.charCodeAt(i);
 		}
 	}
@@ -101,7 +102,7 @@
 				var col = i % width;
 
 				// if data is 2, choose spot color, if 1 choose foreground
-				cc.fillStyle = (imageData[i] == 1) ? opts.color : opts.spotcolor;
+				cc.fillStyle = (imageData[i] === 1) ? opts.color : opts.spotcolor;
 
 				cc.fillRect(col * opts.scale, row * opts.scale, opts.scale, opts.scale);
 			}
